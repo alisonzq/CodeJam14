@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Arrow
-  - Target
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -13,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Mirror
   - 
   - 
   - 
@@ -30,7 +28,7 @@ TagManager:
   - Layer 1
   - Layer 2
   - Layer 3
-  - Layer 4
+  - 
   - 
   - 
   - 
@@ -51,7 +49,4 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
-    locked: 0
-  - name: Layer 4
-    uniqueID: 3658727605
     locked: 0
