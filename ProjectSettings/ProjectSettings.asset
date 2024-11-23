@@ -4,6 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
+
   productGUID: 20901fd3b9a78054e888178c239e28e0
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -157,6 +158,7 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
+
   applicationIdentifier:
     Standalone: com.DefaultCompany.CodeJam14
   buildNumber:
@@ -244,9 +246,9 @@ PlayerSettings:
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   shaderPrecisionModel: 0
-  clonedFromGUID: b9742cdd9187f8d449919213d208335a
+  clonedFromGUID: 00000000000000000000000000000000
   templatePackageId: 
-  templateDefaultScene: Assets/Scenes/SampleScene.unity
+  templateDefaultScene: 
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
