@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    const int DEFAULTMIC = 3;
+    const int DEFAULTMIC = 0;
     const int RECORDING_LENGTH_SECONDS = 10;
     public AudioClip inputClip;
-    bool isInit = false;
     public float sensitivity = -1;
     float[] samplesArray = new float[RECORDING_LENGTH_SECONDS*44100];
     public bool isAdjusting = false;
@@ -20,22 +19,17 @@ public class InputSystem : MonoBehaviour
         if (!isAdjusting) {
             isAdjusting = true;
             Debug.Log("Recording started");
-            sensClip = Microphone.Start(Microphone.devices[3], true, 1, 44100);
+            sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
            
         }
         else isAdjusting = false;
     }
 
-    public void playTestRecordedClip() {
-        Microphone.End(Microphone.devices[DEFAULTMIC]);
-        RecordedData theClip = new(sensClip, 0);
-        FindPeak(theClip);
-        test.clip = theClip.internalClip;
-        test.timeSamples = theClip.offset;
-        float[] testArray = new float[Mathf.RoundToInt(sensClip.length) * 44100 + 1];
-        sensClip.GetData(testArray, 0);
-        test.Play();
+    public void addToRecordings(string name) {
+        RecordedData recording = new(inputClip, 0);
+        FindPeak(recording);
+        RecordingContainer.recordings.Add(name, recording);
     }
 
     public IEnumerator SetSensitivity() {
@@ -81,20 +75,28 @@ public class InputSystem : MonoBehaviour
         // isInit = true;
     }
 
+    IEnumerator RecordingNotif() {
+        Debug.Log("recording now");
+        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 10, 44100);
+        yield return new WaitForSeconds(10);
+        Debug.Log("recording End");
+    }
+
     public void restartRecording() {
-        if (!isInit) return;
-        if (!Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) return;
-        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 3, 44100);
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) Microphone.End(Microphone.devices[DEFAULTMIC]);
+        StartCoroutine(RecordingNotif());
     }
 
     
 
 }
-
+/** <summary> Structure representing recorded data </summary>*/
 public struct RecordedData
 {
     public RecordedData(AudioClip clip, int offset) {
+        //audioClip contained in the struct
         internalClip = clip;
+        // offset from the beginning of the clip where a peak was found
         this.offset = offset;
     }
     public AudioClip internalClip;
