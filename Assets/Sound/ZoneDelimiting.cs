@@ -6,17 +6,18 @@ public class ZoneDelimiting : MonoBehaviour
 {
 
     [SerializeField]
-    private Rigidbody2D _character;
+    private Collider2D _character;
     [SerializeField]
     private ZonePlayer _player;
     private Collider2D _collider;
 
     private void Awake() {
         _collider = GetComponent<Collider2D>(); 
+        _collider.isTrigger = true;
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.rigidbody == _character) {
+    private void OnTriggerEnter2D(Collider2D collider) {
+        if(collider == _character) {
             _player.playZoneTrack(ZoneContainer.getColliderName(_collider));
         }
     }
