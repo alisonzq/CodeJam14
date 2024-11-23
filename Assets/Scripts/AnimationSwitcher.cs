@@ -7,13 +7,15 @@ public class AnimationSwitcher : MonoBehaviour
     public RuntimeAnimatorController[] controllers;
     public GameObject[] instruments;
 
-    private Animator currentAnimator;
+    public Animator animator;
 
-    private HashSet<string> collectedInstruments = new HashSet<string>();
+    public static HashSet<string> collectedInstruments = new HashSet<string>();
+    public static string currentMode;
 
     private void Start()
     {
-        currentAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        currentMode = "Blank";
     }
 
     private void Update()
@@ -44,7 +46,26 @@ public class AnimationSwitcher : MonoBehaviour
     {
         if (index >= 0 && index < controllers.Length)
         {
-            currentAnimator.runtimeAnimatorController = controllers[index];
+            switch (index)
+            {
+                case 0:
+                    currentMode = "Blank";
+                    break;
+                case 1:
+                    currentMode = "Tech";
+                    break;
+                case 2:
+                    currentMode = "Nature";
+                    break;
+                case 3:
+                    currentMode = "Hell";
+                    break;
+                default:
+                    currentMode = "Blank";
+                    break;
+            }
+
+            animator.runtimeAnimatorController = controllers[index];
         }
     }
 

@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 0
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character 1_2
+      name: blankF
       rect:
         serializedVersion: 2
         x: 73
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character 1_3
+      name: blankB
       rect:
         serializedVersion: 2
         x: 105
@@ -236,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character 1_6
+      name: blankS
       rect:
         serializedVersion: 2
         x: 74
@@ -447,9 +447,9 @@ TextureImporter:
       TechB: 1387525639
       TechF: -450415475
       TechS: -205511822
-      character 1_2: 1840196189
-      character 1_3: -1361677375
-      character 1_6: 117023162
+      blankB: -1361677375
+      blankF: 1840196189
+      blankS: 117023162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
