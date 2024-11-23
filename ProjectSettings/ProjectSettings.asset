@@ -4,7 +4,8 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: f25e0cba0578f9f4791fa0423f26073c
+
+  productGUID: 20901fd3b9a78054e888178c239e28e0
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -157,7 +158,9 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.CodeJam14
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -652,7 +655,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: -1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
