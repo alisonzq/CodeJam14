@@ -6,6 +6,8 @@ public class MusicSheet : MonoBehaviour
 {
     public GameObject notePrefab;
     public Transform parent;
+    public MusicPlayer musicPlayer;
+    public int degree;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,10 +16,12 @@ public class MusicSheet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Arrow") && gameObject.CompareTag("Target"))
         {
+            Transform transform = gameObject.transform;
             Destroy(gameObject);
 
-            Instantiate(notePrefab, gameObject.transform.position, Quaternion.identity);
-            //play note music
+            Instantiate(notePrefab, transform.position, Quaternion.identity, parent);
+
+            musicPlayer.playNote(degree);
 
         }
     }
