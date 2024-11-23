@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46470eb948d9ce844b362ffbdff2efad
+guid: 117fa0155a1a545508783d93b5534192
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blank_Front
+      name: notes_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 101
-        width: 14
-        height: 23
+        x: 0
+        y: 1
+        width: 3
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4583b5751706bd04bbcf6fbde253aa5a
-      internalID: -1840964820
+      spriteID: b31a10ac7a75044eca0d765702078b3a
+      internalID: -1276129436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blank_Back
+      name: notes_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 101
-        width: 14
-        height: 23
+        x: 5
+        y: 1
+        width: 3
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,92 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe358facf14ce834fa9e399833977e46
-      internalID: 666979956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Blank_Side
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 69
-        width: 12
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f742ca6e1aac3b44eaa2a6450252f1ab
-      internalID: -1327180140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_3
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 37
-        width: 14
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a67f052282e9ab948a427568c98b8159
-      internalID: -225555458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_4
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 37
-        width: 14
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c95f0a7d822bc8c4ab2e901ed28aaa8c
-      internalID: -496920101
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_5
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 5
-        width: 12
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9fc62533cde8bd74fa367c3bc87fcf17
-      internalID: 603554958
+      spriteID: b4c0ca8799f93472198b22d3f73831d8
+      internalID: -1047774212
       vertices: []
       indices: 
       edges: []
@@ -246,12 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Blank_Back: 666979956
-      Blank_Front: -1840964820
-      Blank_Side: -1327180140
-      character_3: -225555458
-      character_4: -496920101
-      character_5: 603554958
+      notes_0: -1276129436
+      notes_1: -1047774212
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
