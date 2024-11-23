@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: eaff0c29f832d4645bac633a0f5c4124
+<<<<<<<< Updated upstream:Assets/Scenes/New Scene.unity.meta
+guid: 4ee118881d213194586834b4295fd622
+========
+guid: 22ce693465669e84797579e96470539c
+folderAsset: yes
+>>>>>>>> Stashed changes:Assets/Tristan Things/TilePalette.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
