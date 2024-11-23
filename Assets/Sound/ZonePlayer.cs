@@ -11,7 +11,10 @@ public class ZonePlayer : MonoBehaviour
     }
 
     public void playZoneTrack(string zoneName) {
-        _source.PlayOneShot(ZoneContainer.GetClip(zoneName));
+        Debug.Log(zoneName);
+        _source.Stop();
+        _source.clip = ZoneContainer.GetClip(zoneName);
+       _source.Play();
     }
 
 }
