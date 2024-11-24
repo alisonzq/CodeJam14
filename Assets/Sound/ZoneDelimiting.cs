@@ -11,13 +11,16 @@ public class ZoneDelimiting : MonoBehaviour
     private ZonePlayer _player;
     private Collider2D _collider;
 
+    public static string zoneName;
+
     private void Awake() {
         _collider = GetComponent<Collider2D>(); 
         _collider.isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) {
+    private void OnTriggerStay2D(Collider2D collider) {
         if(collider == _character) {
+            zoneName = ZoneContainer.getColliderName(_collider);
             _player.playZoneTrack(ZoneContainer.getColliderName(_collider));
         }
     }
