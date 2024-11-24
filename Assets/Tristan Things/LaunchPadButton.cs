@@ -27,8 +27,5 @@ public class LaunchPadButton : MonoBehaviour
         Debug.Log(manager.score);
         manager.ChangeColor(gameObject);
     }
-    void OnMouseEnter() {
-        Debug.Log(manager.score);
-        manager.ChangeColor(gameObject);
-    }
+
 }

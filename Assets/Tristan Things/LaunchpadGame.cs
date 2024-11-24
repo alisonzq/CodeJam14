@@ -19,11 +19,38 @@ public class LaunchpadGame : MonoBehaviour
 
     public bool isPlaying = false;
 
-    public void Update() {
-        if (!isPlaying && Input.GetMouseButton(0)) {
-            isPlaying = true;
-            StartGame();
+    public List<Transform> computerLocations = new List<Transform>();
+    public List<GameObject> Es = new List<GameObject>();
+
+    public void Update()
+    {
+        if (!isPlaying && AnimationSwitcher.currentMode == "Tech" && AnimationSwitcher.collectedInstruments.Contains("Launchpad"))
+        {
+            int i = 0;
+            foreach (Transform computerLocation in computerLocations)
+            {
+                float distance = Vector3.Distance(computerLocation.position, player.transform.position);
+                if (distance <= 1.5f)
+                {
+                    Es[i].SetActive(true);
+                }
+                else
+                {
+                    Es[i].SetActive(false);
+                }
+
+                if (Es[i].activeSelf && Input.GetKey(KeyCode.E))
+                {
+                    isPlaying = true;
+                    StartGame();
+                }
+
+                i++;
+            }
         }
+
+
+
     }
 
     public void StartGame() {
