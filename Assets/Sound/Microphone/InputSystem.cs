@@ -1,19 +1,21 @@
+using Lasp;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    const int DEFAULTMIC = 0;
-    const int RECORDING_LENGTH_SECONDS = 10;
+    AudioLevelTracker tracker;
+    const int DEFAULTMIC = 3;
+    const int RECORDING_LENGTH_SECONDS = 1;
+
     public AudioClip inputClip;
-    bool isInit = false;
-    public float sensitivity = -1;
+    public float sensitivity = -100f;
     float[] samplesArray = new float[RECORDING_LENGTH_SECONDS*44100];
     public bool isAdjusting = false;
-    public float currentPeak = -1;
+    public float currentPeak = -100f;
     public AudioClip sensClip;
     public AudioSource test;
+    public int maxMicPostion =  RECORDING_LENGTH_SECONDS*44100;
 
     public GameObject greenBar;
     public GameObject yellowBar;
@@ -25,9 +27,9 @@ public class InputSystem : MonoBehaviour
 
     public void setSensitivity() {
         if (!isAdjusting) {
-            sensitivity = 0;
+            sensitivity = -100;
             isAdjusting = true;
-            Debug.Log("Recording started");
+
             sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
            
@@ -35,55 +37,56 @@ public class InputSystem : MonoBehaviour
         else isAdjusting = false;
     }
 
-    public void playTestRecordedClip() {
-        Microphone.End(Microphone.devices[DEFAULTMIC]);
-        RecordedData theClip = new(sensClip, 0);
-        FindPeak(theClip);
-        test.clip = theClip.internalClip;
-        test.timeSamples = theClip.offset;
-        float[] testArray = new float[Mathf.RoundToInt(sensClip.length) * 44100 + 1];
-        sensClip.GetData(testArray, 0);
+    /*
+    public void testRecording() {
+        RecordedData currentRec= FindPeak(inputClip);
+        Debug.Log(currentRec.offset);
+        test.clip = currentRec.internalClip;
+        test.Stop();
+        test.timeSamples = currentRec.offset;
         test.Play();
+    }
+    */
+
+    public void addToRecordings(string name) {
+        RecordedData recording = FindPeak(inputClip);
+        RecordingContainer.recordings.Add(name, recording);
     }
 
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
-            float[] samples = new float[1];
-            if (sensClip != null) {
-                sensClip.GetData(samples, Microphone.GetPosition(Microphone.devices[DEFAULTMIC]));
-                for (int i = 0; i < samples.Length; i++) {
-                    currentPeak = samples[i];
-                    currentPeak = Mathf.Clamp01(currentPeak);
-                    greenBar.transform.localScale = new Vector2(Mathf.Log10(currentPeak + 0.01f) * modifierScale, greenBar.transform.localScale.y);
-                    if (currentPeak > sensitivity) {
-                        sensitivity = currentPeak;
-                        yellowBar.transform.position = new Vector2(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(currentPeak))))) * modifierPos + additionPos, yellowBar.transform.position.y);
-                    }
-                }
-            }
-            yield return new WaitForEndOfFrame();
+<<<<<<< HEAD
+            currentPeak = tracker.inputLevel;
+            if (currentPeak > sensitivity) sensitivity = currentPeak;
+            yield return null;
         }
-        Debug.Log("Recording stopped.");
+        Microphone.End(Microphone.devices[DEFAULTMIC]);
     }
 
-    public void FindPeak(RecordedData clip) {
+    public RecordedData FindPeak(AudioClip clip) {
         bool noPeak = true;
         int i = 0;
-        clip.internalClip.GetData(samplesArray, 0);
+        int offset = 0;
+        float lastVol = -1000;
+        clip.GetData(samplesArray, 0);
         while (noPeak) {
-            float vol = Mathf.Sqrt(Mathf.Sqrt(samplesArray[i] * samplesArray[i]));
+            float vol = 20.0f * Mathf.Log10(samplesArray[i]);
             if (vol >= sensitivity) {
-                Debug.Log("sens " + sensitivity + "\n volume at offset " + vol);
-                clip.offset = i;
-                Debug.Log("off " + clip.offset);
-                noPeak = false;
+                if (lastVol < vol) {
+                    offset = i;
+                    Debug.Log("off " + offset);
+                    lastVol = vol;
+                    Debug.Log("sens " + sensitivity + "\n volume at offset " + vol);
+                }
             }
             i++;
-            if (i > 100000) break;
+            if (i >= samplesArray.Length) break;
         }
+        return new(clip, offset-128);
     }
 
     private void Awake() {
+        tracker = GetComponent<AudioLevelTracker>();
         sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 1, 44100);
         for (int i = 0; i < Microphone.devices.Length; i++) {
             Debug.Log("Microphone " + i + ": " + Microphone.devices[i]);
@@ -93,20 +96,31 @@ public class InputSystem : MonoBehaviour
         // isInit = true;
     }
 
+    IEnumerator RecordingNotif() {
+        Debug.Log("recording now");
+        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
+        yield return new WaitForSeconds(1);
+    }
+
     public void restartRecording() {
-        if (!isInit) return;
-        if (!Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) return;
-        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 3, 44100);
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
+            Microphone.End(Microphone.devices[DEFAULTMIC]);
+            Debug.Log("Recording done");
+            return;
+        }
+        StartCoroutine(RecordingNotif());
     }
 
     
 
 }
-
+/** <summary> Structure representing recorded data </summary>*/
 public struct RecordedData
 {
     public RecordedData(AudioClip clip, int offset) {
+        //audioClip contained in the struct
         internalClip = clip;
+        // offset from the beginning of the clip where a peak was found
         this.offset = offset;
     }
     public AudioClip internalClip;
