@@ -40,5 +40,9 @@ public class DoorHandler : MonoBehaviour
         {
             doorHell.SetActive(false);
         }
+        if (LaunchpadGame.win)
+        {
+            doorTech.SetActive(false);
+        }
     }
 }
