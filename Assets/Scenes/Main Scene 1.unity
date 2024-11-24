@@ -194,7 +194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &10884678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2360,7 +2360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &354782297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2803,7 +2803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &410103050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3067,7 +3067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &433338821
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3232,7 +3232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1414394258}
   E: {fileID: 1180597152}
-  Ui: {fileID: 0}
+  Ui: {fileID: 354782296}
 --- !u!61 &434396186
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4315,7 +4315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1414394258}
   E: {fileID: 629268583}
-  Ui: {fileID: 0}
+  Ui: {fileID: 433338820}
 --- !u!212 &545194040
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20701,7 +20701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1414394258}
   E: {fileID: 252566606}
-  Ui: {fileID: 0}
+  Ui: {fileID: 410103049}
 --- !u!61 &985343351
 BoxCollider2D:
   m_ObjectHideFlags: 0
