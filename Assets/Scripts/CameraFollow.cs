@@ -44,7 +44,15 @@ public class CameraFollow : MonoBehaviour
         {
             cam.orthographicSize = 5;
             clampedTargetPos.x = Mathf.Clamp(clampedTargetPos.x, minNatureBounds.x, maxNatureBounds.x);
-            clampedTargetPos.y = Mathf.Clamp(clampedTargetPos.y, minNatureBounds.y, maxNatureBounds.y);
+
+            if (target.position.y >= 8.3)
+            {
+                clampedTargetPos.y = Mathf.Clamp(clampedTargetPos.y, maxNatureBounds.y, maxNatureBounds.y);
+            }
+            else
+            {
+                clampedTargetPos.y = Mathf.Clamp(clampedTargetPos.y, minNatureBounds.y, maxNatureBounds.y);
+            }
         }
 
         if (ZoneDelimiting.zoneName == "Blank")

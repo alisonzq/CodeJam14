@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Win : MonoBehaviour
+public class WinNature : MonoBehaviour
 {
     public static bool natureWin;
     void Update()
@@ -10,7 +10,7 @@ public class Win : MonoBehaviour
         // Check if all children are targeted
         if (AreAllChildrenTargeted())
         {
-            natureWin = false;
+            natureWin = true;
         }
         else
         {
@@ -20,17 +20,10 @@ public class Win : MonoBehaviour
 
     private bool AreAllChildrenTargeted()
     {
-        foreach (Transform child in transform)
-        {
-            var musicSheetComponent = child.GetComponent<MusicSheet>();
+        if(transform.childCount == 0)
+            return true;
 
-            if (musicSheetComponent == null || !musicSheetComponent.targeted)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return false;
     }
 
 }

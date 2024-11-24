@@ -7,7 +7,7 @@ public class AnimationSwitcher : MonoBehaviour
     public RuntimeAnimatorController[] controllers;
     public GameObject[] instruments;
 
-    public Animator animator;
+    private Animator animator;
 
     public static HashSet<string> collectedInstruments = new HashSet<string>();
     public static string currentMode;

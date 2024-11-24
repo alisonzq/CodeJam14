@@ -32,7 +32,11 @@ public class DoorHandler : MonoBehaviour
             Collect.collectedInTech = false;
         }
 
-        if (Win.natureWin)
+        if (WinNature.natureWin)
+        {
+            doorNature.SetActive(false);
+        }
+        if (Beam.gameOver)
         {
             doorHell.SetActive(false);
         }

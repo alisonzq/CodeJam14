@@ -21,7 +21,7 @@ public class Collect : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (distance <= 1f)
+        if (distance <= 1.5f)
         {
             E.SetActive(true);
         }
