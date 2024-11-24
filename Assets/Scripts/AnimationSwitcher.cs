@@ -12,6 +12,8 @@ public class AnimationSwitcher : MonoBehaviour
     public static HashSet<string> collectedInstruments = new HashSet<string>();
     public static string currentMode;
 
+    public bool container = false;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,26 +22,30 @@ public class AnimationSwitcher : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
+        if (Input.GetKey(KeyCode.Alpha1)) {
             Debug.Log("Anim BLANK");
             SwitchAnimator(0);
         }
-        if (Input.GetKey(KeyCode.Alpha2) && collectedInstruments.Contains("Launchpad"))
+        else if (Input.GetKey(KeyCode.Alpha2) && collectedInstruments.Contains("Launchpad"))
         {
             Debug.Log("Anim Tech");
             SwitchAnimator(1);
         } 
-        if (Input.GetKey(KeyCode.Alpha3) && collectedInstruments.Contains("Lyre"))
-        {
+        else if (Input.GetKey(KeyCode.Alpha3) && collectedInstruments.Contains("Lyre")) {
+            
             Debug.Log("Anim Nature");
             SwitchAnimator(2);
         }
-        if (Input.GetKey(KeyCode.Alpha4) && collectedInstruments.Contains("Guitar"))
-        {
+        else if (Input.GetKey(KeyCode.Alpha4) && collectedInstruments.Contains("Guitar")) {
+           
             Debug.Log("Anim Hell");
             SwitchAnimator(3);
-        } 
+        }
+        else if (!container && ZoneDelimiting.zoneName == "Blank") 
+        {
+            container = true;
+            SwitchAnimator(0);
+        }
     }
 
     private void SwitchAnimator(int index)
@@ -74,8 +80,8 @@ public class AnimationSwitcher : MonoBehaviour
         for (int i = 0; i < controllers.Length; i++)
         {
             GameObject instrument = instruments[i];
-            if (name == instrument.name)
-            {
+            if (name == instrument.name) {
+                container = false;
                 Debug.Log($"Collision with {instrument.name} detected!");
                 collectedInstruments.Add(instrument.name);
                 SwitchAnimator(i+1);
