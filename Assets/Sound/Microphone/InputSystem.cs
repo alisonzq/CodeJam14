@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    const int DEFAULTMIC = 3;
+    const int DEFAULTMIC = 0;
     const int RECORDING_LENGTH_SECONDS = 10;
     public AudioClip inputClip;
     bool isInit = false;
@@ -15,12 +15,20 @@ public class InputSystem : MonoBehaviour
     public AudioClip sensClip;
     public AudioSource test;
 
+    public GameObject greenBar;
+    public GameObject yellowBar;
+
+    public float modifierScale;
+    public float modifierPos;
+    public float additionPos;
+
 
     public void setSensitivity() {
         if (!isAdjusting) {
+            sensitivity = 0;
             isAdjusting = true;
             Debug.Log("Recording started");
-            sensClip = Microphone.Start(Microphone.devices[3], true, 1, 44100);
+            sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
            
         }
@@ -40,17 +48,21 @@ public class InputSystem : MonoBehaviour
 
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
-            float[] samples = new float[128];
+            float[] samples = new float[1];
             if (sensClip != null) {
                 sensClip.GetData(samples, Microphone.GetPosition(Microphone.devices[DEFAULTMIC]));
                 for (int i = 0; i < samples.Length; i++) {
-                    currentPeak = samples[i] * samples[i];
-                    if (currentPeak > sensitivity) sensitivity = currentPeak;
+                    currentPeak = samples[i];
+                    currentPeak = Mathf.Clamp01(currentPeak);
+                    greenBar.transform.localScale = new Vector2(Mathf.Log10(currentPeak + 0.01f) * modifierScale, greenBar.transform.localScale.y);
+                    if (currentPeak > sensitivity) {
+                        sensitivity = currentPeak;
+                        yellowBar.transform.position = new Vector2(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(currentPeak))))) * modifierPos + additionPos, yellowBar.transform.position.y);
+                    }
                 }
             }
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
-        sensitivity = Mathf.Sqrt(Mathf.Sqrt(sensitivity));
         Debug.Log("Recording stopped.");
     }
 
