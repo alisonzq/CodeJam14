@@ -10,6 +10,7 @@ public class ZoneDelimiting : MonoBehaviour
     [SerializeField]
     private ZonePlayer _player;
     private Collider2D _collider;
+    private bool started = false;
 
     public static string zoneName;
 
@@ -18,10 +19,17 @@ public class ZoneDelimiting : MonoBehaviour
         _collider.isTrigger = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collider) {
-        if(collider == _character) {
+    private void OnTriggerEnter2D(Collider2D collider) {
+        if(!started && collider == _character) {
+            started = true;
             zoneName = ZoneContainer.getColliderName(_collider);
             _player.playZoneTrack(ZoneContainer.getColliderName(_collider));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if(collision == _character) {
+            started = true;
         }
     }
 }
