@@ -1,24 +1,26 @@
+using Lasp;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    const int DEFAULTMIC = 0;
-    const int RECORDING_LENGTH_SECONDS = 10;
+    AudioLevelTracker tracker;
+    const int DEFAULTMIC = 3;
+    const int RECORDING_LENGTH_SECONDS = 1;
     public AudioClip inputClip;
-    public float sensitivity = -1;
+    public float sensitivity = -100f;
     float[] samplesArray = new float[RECORDING_LENGTH_SECONDS*44100];
     public bool isAdjusting = false;
-    public float currentPeak = -1;
+    public float currentPeak = -100f;
     public AudioClip sensClip;
     public AudioSource test;
+    public int maxMicPostion =  RECORDING_LENGTH_SECONDS*44100;
 
 
     public void setSensitivity() {
         if (!isAdjusting) {
+            sensitivity = -100;
             isAdjusting = true;
-            Debug.Log("Recording started");
             sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
            
@@ -26,46 +28,55 @@ public class InputSystem : MonoBehaviour
         else isAdjusting = false;
     }
 
+    /*
+    public void testRecording() {
+        RecordedData currentRec= FindPeak(inputClip);
+        Debug.Log(currentRec.offset);
+        test.clip = currentRec.internalClip;
+        test.Stop();
+        test.timeSamples = currentRec.offset;
+        test.Play();
+    }
+    */
+
     public void addToRecordings(string name) {
-        RecordedData recording = new(inputClip, 0);
-        FindPeak(recording);
+        RecordedData recording = FindPeak(inputClip);
         RecordingContainer.recordings.Add(name, recording);
     }
 
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
-            float[] samples = new float[128];
-            if (sensClip != null) {
-                sensClip.GetData(samples, Microphone.GetPosition(Microphone.devices[DEFAULTMIC]));
-                for (int i = 0; i < samples.Length; i++) {
-                    currentPeak = samples[i] * samples[i];
-                    if (currentPeak > sensitivity) sensitivity = currentPeak;
-                }
-            }
+            currentPeak = tracker.inputLevel;
+            if (currentPeak > sensitivity) sensitivity = currentPeak;
             yield return null;
         }
-        sensitivity = Mathf.Sqrt(Mathf.Sqrt(sensitivity));
-        Debug.Log("Recording stopped.");
+        Microphone.End(Microphone.devices[DEFAULTMIC]);
     }
 
-    public void FindPeak(RecordedData clip) {
+    public RecordedData FindPeak(AudioClip clip) {
         bool noPeak = true;
         int i = 0;
-        clip.internalClip.GetData(samplesArray, 0);
+        int offset = 0;
+        float lastVol = -1000;
+        clip.GetData(samplesArray, 0);
         while (noPeak) {
-            float vol = Mathf.Sqrt(Mathf.Sqrt(samplesArray[i] * samplesArray[i]));
+            float vol = 20.0f * Mathf.Log10(samplesArray[i]);
             if (vol >= sensitivity) {
-                Debug.Log("sens " + sensitivity + "\n volume at offset " + vol);
-                clip.offset = i;
-                Debug.Log("off " + clip.offset);
-                noPeak = false;
+                if (lastVol < vol) {
+                    offset = i;
+                    Debug.Log("off " + offset);
+                    lastVol = vol;
+                    Debug.Log("sens " + sensitivity + "\n volume at offset " + vol);
+                }
             }
             i++;
-            if (i > 100000) break;
+            if (i >= samplesArray.Length) break;
         }
+        return new(clip, offset-128);
     }
 
     private void Awake() {
+        tracker = GetComponent<AudioLevelTracker>();
         sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 1, 44100);
         for (int i = 0; i < Microphone.devices.Length; i++) {
             Debug.Log("Microphone " + i + ": " + Microphone.devices[i]);
@@ -77,13 +88,16 @@ public class InputSystem : MonoBehaviour
 
     IEnumerator RecordingNotif() {
         Debug.Log("recording now");
-        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], false, 10, 44100);
-        yield return new WaitForSeconds(10);
-        Debug.Log("recording End");
+        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
+        yield return new WaitForSeconds(1);
     }
 
     public void restartRecording() {
-        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) Microphone.End(Microphone.devices[DEFAULTMIC]);
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
+            Microphone.End(Microphone.devices[DEFAULTMIC]);
+            Debug.Log("Recording done");
+            return;
+        }
         StartCoroutine(RecordingNotif());
     }
 
