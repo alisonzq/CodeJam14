@@ -7,6 +7,7 @@ public class InputSystem : MonoBehaviour
     AudioLevelTracker tracker;
     const int DEFAULTMIC = 3;
     const int RECORDING_LENGTH_SECONDS = 1;
+
     public AudioClip inputClip;
     public float sensitivity = -100f;
     float[] samplesArray = new float[RECORDING_LENGTH_SECONDS*44100];
@@ -16,11 +17,19 @@ public class InputSystem : MonoBehaviour
     public AudioSource test;
     public int maxMicPostion =  RECORDING_LENGTH_SECONDS*44100;
 
+    public GameObject greenBar;
+    public GameObject yellowBar;
+
+    public float modifierScale;
+    public float modifierPos;
+    public float additionPos;
+
 
     public void setSensitivity() {
         if (!isAdjusting) {
             sensitivity = -100;
             isAdjusting = true;
+
             sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
            
@@ -46,6 +55,7 @@ public class InputSystem : MonoBehaviour
 
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
+<<<<<<< HEAD
             currentPeak = tracker.inputLevel;
             if (currentPeak > sensitivity) sensitivity = currentPeak;
             yield return null;

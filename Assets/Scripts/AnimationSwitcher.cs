@@ -1,16 +1,21 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AnimationSwitcher : MonoBehaviour
 {
     public RuntimeAnimatorController[] controllers;
     public GameObject[] instruments;
 
-    private Animator currentAnimator;
-    private AnimatorOverrideController overrideController;
+    private Animator animator;
+
+    public static HashSet<string> collectedInstruments = new HashSet<string>();
+    public static string currentMode;
 
     private void Start()
     {
-        currentAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        currentMode = "Blank";
     }
 
     private void Update()
@@ -20,49 +25,65 @@ public class AnimationSwitcher : MonoBehaviour
             Debug.Log("Anim BLANK");
             SwitchAnimator(0);
         }
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.Alpha2) && collectedInstruments.Contains("Launchpad"))
         {
             Debug.Log("Anim Tech");
             SwitchAnimator(1);
         } 
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKey(KeyCode.Alpha3) && collectedInstruments.Contains("Lyre"))
         {
             Debug.Log("Anim Nature");
             SwitchAnimator(2);
         }
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKey(KeyCode.Alpha4) && collectedInstruments.Contains("Guitar"))
         {
             Debug.Log("Anim Hell");
             SwitchAnimator(3);
         } 
     }
 
-    public Animator GetAnimator()
-    {
-        return currentAnimator;
-    }
-
     private void SwitchAnimator(int index)
     {
         if (index >= 0 && index < controllers.Length)
         {
-            currentAnimator.runtimeAnimatorController = controllers[index];
-            Debug.Log($"Switched to Animator {index + 1}");
+            switch (index)
+            {
+                case 0:
+                    currentMode = "Blank";
+                    break;
+                case 1:
+                    currentMode = "Tech";
+                    break;
+                case 2:
+                    currentMode = "Nature";
+                    break;
+                case 3:
+                    currentMode = "Hell";
+                    break;
+                default:
+                    currentMode = "Blank";
+                    break;
+            }
+
+            animator.runtimeAnimatorController = controllers[index];
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    public void SwitchToCollected(string name)
     {
         for (int i = 0; i < controllers.Length; i++)
         {
             GameObject instrument = instruments[i];
-            if (collision.gameObject.name == instrument.name)
+            if (name == instrument.name)
             {
                 Debug.Log($"Collision with {instrument.name} detected!");
-                SwitchAnimator(i);
+                collectedInstruments.Add(instrument.name);
+                SwitchAnimator(i+1);
+                instrument.SetActive(false);
                 break;
             }
         }
 
     }
+
 }
