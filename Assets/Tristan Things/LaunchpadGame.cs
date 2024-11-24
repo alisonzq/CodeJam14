@@ -24,6 +24,12 @@ public class LaunchpadGame : MonoBehaviour
     private Vector2 returnPosition;
     public bool isUnlockNature = false;
 
+    public AudioSource source;
+    public AudioClip clip;
+
+    public InputSystem inputSystem;
+
+
     public void Update()
     {
         if (!isPlaying && AnimationSwitcher.currentMode == "Tech" && AnimationSwitcher.collectedInstruments.Contains("Launchpad"))
@@ -69,6 +75,14 @@ public class LaunchpadGame : MonoBehaviour
     }
 
     public void ChangeColor(GameObject button) {
+
+        if (RecordingContainer.recordings.ContainsKey("Launch")) {
+            source.clip = RecordingContainer.recordings["Launch"].internalClip;
+            source.Stop();
+            source.timeSamples = RecordingContainer.recordings["Launch"].offset;
+            source.Play();
+        }
+
         LaunchColor color = button.GetComponent<LaunchPadButton>().color;
         Debug.Log(color);
         switch (color) {

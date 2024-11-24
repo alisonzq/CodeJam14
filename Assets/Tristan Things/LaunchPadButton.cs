@@ -26,6 +26,7 @@ public class LaunchPadButton : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         Debug.Log(manager.score);
         manager.ChangeColor(gameObject);
+        manager.source.PlayOneShot(manager.clip);
     }
 
 }

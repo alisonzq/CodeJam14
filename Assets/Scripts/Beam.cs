@@ -25,6 +25,9 @@ public class Beam : MonoBehaviour
 
     public static bool gameOver = false;
 
+    public AudioSource source;
+    public InputSystem inputSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +46,10 @@ public class Beam : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext callbackContext)
     {
-        if (canFire && AnimationSwitcher.currentMode == "Hell" && AnimationSwitcher.collectedInstruments.Contains("Guitar"))
-        {
+        if (canFire && AnimationSwitcher.currentMode == "Hell" && AnimationSwitcher.collectedInstruments.Contains("Guitar")) {
+
+            
+
             currentPoint = transform.position;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentDirection = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
@@ -55,10 +60,27 @@ public class Beam : MonoBehaviour
     }
 
 
-    public IEnumerator BasisBeamOut()
+    public IEnumerator BasisBeamOut() 
     {
+
+        if (RecordingContainer.recordings.ContainsKey("Bonetar")) {
+            source.clip = RecordingContainer.recordings["Bonetar"].internalClip;
+            source.Stop();
+            source.timeSamples = RecordingContainer.recordings["Bonetar"].offset;
+            source.Play();
+        }
+
+        int i = 0;
         while (currentPoint.y > -37 && currentPoint.x > -19 && currentPoint.x < 0)
         {
+            
+            /*if (i % 10 == 0 && RecordingContainer.recordings.ContainsKey("Bonetar")) {
+                source.clip = RecordingContainer.recordings["Bonetar"].internalClip;
+                source.Stop();
+                source.timeSamples = RecordingContainer.recordings["Bonetar"].offset;
+                source.Play();
+            }*/
+            i++;
             selfcollider.enabled = false;
             RaycastHit2D other = Physics2D.Raycast(currentPoint, currentDirection, 0.11f, wallMask);
             selfcollider.enabled = true;
@@ -69,8 +91,14 @@ public class Beam : MonoBehaviour
                 break;
             }
             RaycastHit2D hit = Physics2D.Raycast(currentPoint, currentDirection, 0.11f, mirrorMask);
-            if (hit)
-            {
+            if (hit) {
+                if (RecordingContainer.recordings.ContainsKey("Bonetar")) {
+                    source.clip = RecordingContainer.recordings["Bonetar"].internalClip;
+                    source.Stop();
+                    source.timeSamples = RecordingContainer.recordings["Bonetar"].offset;
+                    source.Play();
+                }
+
                 Vector2 ihat = new Vector2(hit.normal.x, hit.normal.y);
                 Vector2 jhat = new Vector2(ihat.y, -ihat.x);
                 float determinant = 1 / (ihat.x * jhat.y - ihat.y * jhat.x);

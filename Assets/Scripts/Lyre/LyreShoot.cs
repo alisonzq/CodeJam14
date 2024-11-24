@@ -10,6 +10,9 @@ public class PlayerShoot : MonoBehaviour
     private bool isAiming = false;
 
 
+    public AudioSource source;
+    public InputSystem inputSystem;
+
     void Update()
     {
         if (AnimationSwitcher.currentMode == "Nature" && AnimationSwitcher.collectedInstruments.Contains("Lyre"))
@@ -47,8 +50,14 @@ public class PlayerShoot : MonoBehaviour
         }
 
     }
-    void ShootArrow()
-    {
+    void ShootArrow() {
+        if (RecordingContainer.recordings.ContainsKey("Lyre")) {
+            source.clip = RecordingContainer.recordings["Lyre"].internalClip;
+            source.Stop();
+            source.timeSamples = RecordingContainer.recordings["Lyre"].offset;
+            source.Play();
+        }
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = -(mousePos - shootPoint.transform.position).normalized;
 
@@ -62,6 +71,9 @@ public class PlayerShoot : MonoBehaviour
         Collider2D arrowCollider = arrow.GetComponent<Collider2D>();
         Collider2D playerCollider = GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(arrowCollider, playerCollider);
+
+        
+
 
     }
 
