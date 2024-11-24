@@ -11,6 +11,8 @@ public class Collect : MonoBehaviour
     public static bool collectedInNature;
     public static bool collectedInTech;
 
+    public GameObject Ui;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class Collect : MonoBehaviour
 
         if (E.activeSelf && Input.GetKey(KeyCode.E))
         {
+            Ui.SetActive(true);
             switch (gameObject.name)
             {
                 case "Guitar":
