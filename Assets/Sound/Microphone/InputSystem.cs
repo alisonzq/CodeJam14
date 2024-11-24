@@ -8,7 +8,10 @@ public class InputSystem : MonoBehaviour
     const int DEFAULTMIC = 3;
     const int RECORDING_LENGTH_SECONDS = 1;
 
-    public AudioClip inputClip;
+    public AudioClip inputClipLaunch;
+    public AudioClip inputClipLyre;
+    public AudioClip inputClipBonetar;
+
     public float sensitivity = -100f;
     float[] samplesArray = new float[RECORDING_LENGTH_SECONDS*44100];
     public bool isAdjusting = false;
@@ -18,8 +21,17 @@ public class InputSystem : MonoBehaviour
     public int maxMicPostion =  RECORDING_LENGTH_SECONDS*44100;
 
     public GameObject greenBar;
+    public GameObject setBarTotal;
     public GameObject yellowBar;
+    public GameObject orangeBarObjLaunch;
+    public GameObject orangeBarObjLyre;
+    public GameObject orangeBarObjBonetar;
+    public GameObject orangeBarLaunch;
+    public GameObject orangeBarLyre;
+    public GameObject orangeBarBonetar;
+    public GameObject micPointer;
 
+    public float modifierScaleOrange;
     public float modifierScale;
     public float modifierPos;
     public float additionPos;
@@ -27,28 +39,43 @@ public class InputSystem : MonoBehaviour
 
     public void setSensitivity() {
         if (!isAdjusting) {
+            setBarTotal.SetActive(true);
             sensitivity = -100;
             isAdjusting = true;
 
             sensClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, 1, 44100);
             StartCoroutine(SetSensitivity());
-           
+
+        } else {
+            isAdjusting = false;
+            setBarTotal.SetActive(false);
         }
-        else isAdjusting = false;
     }
 
-    /*
-    public void testRecording() {
-        RecordedData currentRec= FindPeak(inputClip);
+    public void testRecordingLauch() {
+        RecordedData currentRec= FindPeak(inputClipLaunch);
+        testRecording(currentRec);
+    }
+
+    public void testRecordingLyre() {
+        RecordedData currentRec = FindPeak(inputClipLyre);
+        testRecording(currentRec);
+    }
+
+    public void testRecordingBonetar() {
+        RecordedData currentRec = FindPeak(inputClipBonetar);
+        testRecording(currentRec);
+    }
+
+    public void testRecording(RecordedData currentRec) {
         Debug.Log(currentRec.offset);
         test.clip = currentRec.internalClip;
         test.Stop();
         test.timeSamples = currentRec.offset;
         test.Play();
     }
-    */
 
-    public void addToRecordings(string name) {
+    public void addToRecordings(string name, AudioClip inputClip) {
         RecordedData recording = FindPeak(inputClip);
         RecordingContainer.recordings.Add(name, recording);
     }
@@ -56,7 +83,12 @@ public class InputSystem : MonoBehaviour
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
             currentPeak = tracker.inputLevel;
-            if (currentPeak > sensitivity) sensitivity = currentPeak;
+            currentPeak = (currentPeak + 50) / (50) * (100) - 100;
+            greenBar.transform.localScale = new Vector2(1 + (currentPeak * modifierScale)  , greenBar.transform.localScale.y);
+            if (currentPeak > sensitivity) {
+                sensitivity = currentPeak;
+                yellowBar.transform.localPosition = new Vector3((1 + (currentPeak * modifierScale)) * modifierPos +additionPos ,yellowBar.transform.localPosition.y, yellowBar.transform.localPosition.z);
+            }
             yield return null;
         }
         Microphone.End(Microphone.devices[DEFAULTMIC]);
@@ -95,22 +127,67 @@ public class InputSystem : MonoBehaviour
         // isInit = true;
     }
 
-    IEnumerator RecordingNotif() {
+    IEnumerator RecordingNotifLaunch() {
         Debug.Log("recording now");
-        inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
+        inputClipLaunch = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
         yield return new WaitForSeconds(1);
     }
 
-    public void restartRecording() {
+    IEnumerator RecordingNotifLyre() {
+        Debug.Log("recording now");
+        inputClipLyre = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
+        yield return new WaitForSeconds(1);
+    }
+
+    IEnumerator RecordingNotifBonetar() {
+        Debug.Log("recording now");
+        inputClipBonetar = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
+        yield return new WaitForSeconds(1);
+    }
+
+
+    public void Update() {
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
+            orangeBarLaunch.transform.localScale = new Vector2(modifierScaleOrange * Microphone.GetPosition(Microphone.devices[DEFAULTMIC]) ,orangeBarLaunch.transform.localScale.y);
+            orangeBarLyre.transform.localScale = new Vector2(modifierScaleOrange * Microphone.GetPosition(Microphone.devices[DEFAULTMIC]), orangeBarLyre.transform.localScale.y);
+            orangeBarBonetar.transform.localScale = new Vector2(modifierScaleOrange * Microphone.GetPosition(Microphone.devices[DEFAULTMIC]), orangeBarBonetar.transform.localScale.y);
+        }
+    }
+
+    public void restartRecordingLaunch() {
         if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
             Microphone.End(Microphone.devices[DEFAULTMIC]);
             Debug.Log("Recording done");
+            orangeBarObjLaunch.SetActive(false);
             return;
         }
-        StartCoroutine(RecordingNotif());
+        StartCoroutine(RecordingNotifLaunch());
+        orangeBarObjLaunch.SetActive(true);
     }
 
-    
+    public void restartRecordingLyre() {
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
+            Microphone.End(Microphone.devices[DEFAULTMIC]);
+            Debug.Log("Recording done");
+            orangeBarObjLyre.SetActive(false);
+            return;
+        }
+        StartCoroutine(RecordingNotifLyre());
+        orangeBarObjLyre.SetActive(true);
+    }
+
+    public void restartRecordingBonetar() {
+        if (Microphone.IsRecording(Microphone.devices[DEFAULTMIC])) {
+            Microphone.End(Microphone.devices[DEFAULTMIC]);
+            Debug.Log("Recording done");
+            orangeBarObjBonetar.SetActive(false);
+            return;
+        }
+        StartCoroutine(RecordingNotifBonetar());
+        orangeBarObjBonetar.SetActive(true);
+    }
+
+
 
 }
 /** <summary> Structure representing recorded data </summary>*/
