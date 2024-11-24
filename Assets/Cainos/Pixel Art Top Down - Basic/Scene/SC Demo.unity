@@ -388,7 +388,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11080,7 +11080,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12497,7 +12497,7 @@ Camera:
   far clip plane: 500
   field of view: 60
   orthographic: 1
-  orthographic size: 1.8905926
+  orthographic size: 2.504867
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -32674,7 +32674,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -32896,7 +32896,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -33632,7 +33632,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -33770,7 +33770,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636239691
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2d7de7a2b0f3345d494af708e2b82a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -8,6 +8,7 @@ public class MusicSheet : MonoBehaviour
     public Transform parent;
     public MusicPlayer musicPlayer;
     public int degree;
+    public bool targeted = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -16,6 +17,7 @@ public class MusicSheet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Arrow") && gameObject.CompareTag("Target"))
         {
+            targeted = true;
             Transform transform = gameObject.transform;
             Destroy(gameObject);
 
