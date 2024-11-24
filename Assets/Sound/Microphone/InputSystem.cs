@@ -55,7 +55,6 @@ public class InputSystem : MonoBehaviour
 
     public IEnumerator SetSensitivity() {
         while (isAdjusting) {
-<<<<<<< HEAD
             currentPeak = tracker.inputLevel;
             if (currentPeak > sensitivity) sensitivity = currentPeak;
             yield return null;

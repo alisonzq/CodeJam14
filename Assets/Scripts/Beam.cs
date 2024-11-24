@@ -76,7 +76,7 @@ public class Beam : MonoBehaviour
                 currentDirection = new Vector2(ihat.x * directionAdjusted.x + jhat.x * directionAdjusted.y, ihat.y * directionAdjusted.x + jhat.y * directionAdjusted.y);
             }
             currentPoint += currentDirection * Time.deltaTime * 5f;
-            Instantiate(beam, currentPoint, Quaternion.identity, beamHolder.transform);
+            Instantiate(beam, currentPoint, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(currentDirection.y, currentDirection.x) * 180/Mathf.PI)), beamHolder.transform);
             yield return null;
         }
 
