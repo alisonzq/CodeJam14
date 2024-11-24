@@ -9,7 +9,7 @@ public class BlankZone : MonoBehaviour
     [SerializeField]
     private Collider2D _character;
     [SerializeField]
-    private ZonePlayer _player;
+    private MultiSourcePlayer _player;
     private Collider2D _collider;
     private bool started = false;
 
@@ -24,13 +24,13 @@ public class BlankZone : MonoBehaviour
         if (!started && collider == _character) {
             started = true;
             zoneName = ZoneContainer.getColliderName(_collider);
-            _player.playZoneTrack(ZoneContainer.getColliderName(_collider));
+            _player.play();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision == _character) {
-            started = true;
+            started = false;
         }
     }
 }
