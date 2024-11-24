@@ -21,6 +21,7 @@ public class Beam : MonoBehaviour
     private Vector2 currentDirection;
     public List<Vector2> fullbeam;
     public Sprite Light;
+    public BoxCollider2D selfcollider; 
 
     public static bool gameOver = false;
 
@@ -28,10 +29,11 @@ public class Beam : MonoBehaviour
     void Start()
     {
         mirrorMask = LayerMask.GetMask("Mirror");
-        wallMask = LayerMask.GetMask("Layer 1");
+        wallMask = LayerMask.GetMask("Layer 2");
         currentPoint = transform.position;
         goal = goalObject.transform.position;
         RayDirection = Vector2.right;
+        selfcollider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -57,7 +59,9 @@ public class Beam : MonoBehaviour
     {
         while (currentPoint.y > -37 && currentPoint.x > -19 && currentPoint.x < 0)
         {
+            selfcollider.enabled = false;
             RaycastHit2D other = Physics2D.Raycast(currentPoint, currentDirection, 0.11f, wallMask);
+            selfcollider.enabled = true;
             if (other){
                 if (other.transform.position == goalObject.transform.position){
                     GameOver();
