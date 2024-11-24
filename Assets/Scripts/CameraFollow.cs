@@ -87,6 +87,11 @@ public class CameraFollow : MonoBehaviour
 
         }
 
+        if (ZoneDelimiting.zoneName == "Blank" && LaunchpadGame.isPlaying) 
+        {
+            cam.orthographicSize = 3.16f;
+        }
+
         targetPos = clampedTargetPos + offset;
         targetPos.z = transform.position.z;
         transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
