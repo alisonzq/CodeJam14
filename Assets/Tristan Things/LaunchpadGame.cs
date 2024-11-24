@@ -64,6 +64,7 @@ public class LaunchpadGame : MonoBehaviour
     }
 
     public void EndGame() {
+        Progression.progressTech();
         player.transform.position = returnPosition;
         isPlaying = false;
         if (isUnlockNature)

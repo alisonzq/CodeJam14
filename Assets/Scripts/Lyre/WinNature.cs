@@ -8,8 +8,8 @@ public class WinNature : MonoBehaviour
     void Update()
     {
         // Check if all children are targeted
-        if (AreAllChildrenTargeted())
-        {
+        if (AreAllChildrenTargeted()) {
+            Progression.progressNature();
             natureWin = true;
         }
         else

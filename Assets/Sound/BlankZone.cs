@@ -13,6 +13,9 @@ public class BlankZone : MonoBehaviour
     private Collider2D _collider;
     private bool started = false;
 
+
+    public GameObject victory;
+
     public static string zoneName;
 
     private void Awake() {
@@ -25,12 +28,16 @@ public class BlankZone : MonoBehaviour
             started = true;
             zoneName = ZoneContainer.getColliderName(_collider);
             _player.play();
+            if (Progression.hell) {
+                victory.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision == _character) {
             started = false;
+            _player.stop();
         }
     }
 }
