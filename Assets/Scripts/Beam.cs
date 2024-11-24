@@ -36,23 +36,13 @@ public class Beam : MonoBehaviour
 
     private void Update()
     {
-        if (AnimationSwitcher.currentMode == "Hell" && AnimationSwitcher.collectedInstruments.Contains("Guitar"))
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Fire();
-            }
 
-        }
     }
 
-    public void Fire()
+    public void Fire(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("Call fire");
-
-        if (canFire)
+        if (canFire && AnimationSwitcher.currentMode == "Hell" && AnimationSwitcher.collectedInstruments.Contains("Guitar"))
         {
-            Debug.Log("Firing");
             currentPoint = transform.position;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentDirection = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
