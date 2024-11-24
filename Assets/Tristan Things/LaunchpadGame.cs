@@ -8,45 +8,43 @@ public class LaunchpadGame : MonoBehaviour
     public Sprite green;
     public Sprite blue;
 
-    public GameObject door;
-
     public int score = 0;
 
     public Transform gamePosition;
-    public Vector2 returnPosition;
 
     public GameObject player;
 
-    public bool isPlaying = false;
+    public GameObject door; 
+    public static bool isPlaying = false;
 
-    public List<Transform> computerLocations = new List<Transform>();
-    public List<GameObject> Es = new List<GameObject>();
+    public Transform computerLocation;
+    public GameObject E;
+
+    public static bool win = false;
+    private Vector2 returnPosition;
+    public bool isUnlockNature = false;
 
     public void Update()
     {
         if (!isPlaying && AnimationSwitcher.currentMode == "Tech" && AnimationSwitcher.collectedInstruments.Contains("Launchpad"))
         {
-            int i = 0;
-            foreach (Transform computerLocation in computerLocations)
+            float distance = Vector3.Distance(computerLocation.position, player.transform.position);
+            if (distance <= 1.5f)
             {
-                float distance = Vector3.Distance(computerLocation.position, player.transform.position);
-                if (distance <= 1.5f)
-                {
-                    Es[i].SetActive(true);
-                }
-                else
-                {
-                    Es[i].SetActive(false);
-                }
-
-                if (Es[i].activeSelf && Input.GetKey(KeyCode.E))
-                {
-                    isPlaying = true;
-                    StartGame();
-                }
-
-                i++;
+                returnPosition = player.transform.position;
+                E.SetActive(true);
             }
+            else
+            {
+                E.SetActive(false);
+            }
+
+            if (E.activeSelf && Input.GetKey(KeyCode.E))
+            {
+                isPlaying = true;
+                StartGame();
+            }
+
         }
 
 
@@ -61,7 +59,13 @@ public class LaunchpadGame : MonoBehaviour
 
     public void EndGame() {
         player.transform.position = returnPosition;
-        door.SetActive(false);
+        isPlaying = false;
+        if (isUnlockNature)
+        {
+            door.SetActive(false);
+        }
+        else
+            win = true;
     }
 
     public void ChangeColor(GameObject button) {

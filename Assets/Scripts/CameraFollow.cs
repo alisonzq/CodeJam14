@@ -22,6 +22,9 @@ public class CameraFollow : MonoBehaviour
     public Vector2 minTechBounds;
     public Vector2 maxTechBounds;
 
+    public Vector2 minTechGameBounds;
+    public Vector2 maxTechGameBounds;
+
     private Camera cam;
     private void Start()
     {
@@ -55,7 +58,7 @@ public class CameraFollow : MonoBehaviour
             }
         }
 
-        if (ZoneDelimiting.zoneName == "Blank")
+        if (ZoneDelimiting.zoneName == "Blank" && !LaunchpadGame.isPlaying)
         {
             cam.orthographicSize = 5;
             clampedTargetPos.x = Mathf.Clamp(clampedTargetPos.x, minBlankBounds.x, maxBlankBounds.x);
@@ -72,8 +75,16 @@ public class CameraFollow : MonoBehaviour
         if (ZoneDelimiting.zoneName == "Tech")
         {
             cam.orthographicSize = 3.16f;
-            clampedTargetPos.x = Mathf.Clamp(clampedTargetPos.x, minTechBounds.x, maxTechBounds.x);
-            clampedTargetPos.y = Mathf.Clamp(clampedTargetPos.y, minTechBounds.y, maxTechBounds.y);
+            if (LaunchpadGame.isPlaying)
+            {
+
+            }
+            else
+            {
+                clampedTargetPos.x = Mathf.Clamp(clampedTargetPos.x, minTechBounds.x, maxTechBounds.x);
+                clampedTargetPos.y = Mathf.Clamp(clampedTargetPos.y, minTechBounds.y, maxTechBounds.y);
+            }
+
         }
 
         targetPos = clampedTargetPos + offset;
