@@ -125516,7 +125516,6 @@ GameObject:
   - component: {fileID: 1802952569}
   - component: {fileID: 1802952568}
   - component: {fileID: 1802952567}
-  - component: {fileID: 1802952566}
   m_Layer: 0
   m_Name: Mic
   m_TagString: Untagged
@@ -125524,31 +125523,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1802952566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802952565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c3e183ec27ba64d83e010bf18edb92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useDefaultDevice: 0
-  _deviceID: '{0.0.1.00000000}.{8f6471a7-ca54-4425-a482-06a9682a4633}'
-  _channel: 0
-  _filterType: 0
-  _autoGain: 0
-  _gain: 6
-  _dynamicRange: 12
-  _smoothFall: 1
-  _fallSpeed: 0.3
-  _propertyBinders: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!82 &1802952567
 AudioSource:
   m_ObjectHideFlags: 0
@@ -146288,7 +146262,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 99af88280987a68488ea0cd408b5d5de, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0

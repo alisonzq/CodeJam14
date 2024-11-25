@@ -2,9 +2,12 @@ using Lasp;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class InputSystem : MonoBehaviour
 {
+    private List<string> devices;
     AudioLevelTracker tracker;
     public int defaultMic = 0;
     const int RECORDING_LENGTH_SECONDS = 1;
@@ -40,8 +43,15 @@ public class InputSystem : MonoBehaviour
     public TextMeshProUGUI[] mics;
 
 
+
+    private void setMic() {
+        setMic(defaultMic);
+    }
+
     public void setMic(int i) {
+        createTracker();
         defaultMic = i;
+        tracker.deviceID = devices[i];
     }
     public void setSensitivity() {
         if (!isAdjusting) {
@@ -142,13 +152,29 @@ public class InputSystem : MonoBehaviour
         return new(clip, offset);
     }
 
-    private void Awake() {
-        tracker = GetComponent<AudioLevelTracker>();
-        sensClip = Microphone.Start(Microphone.devices[defaultMic], false, 1, 44100);
-        for (int i = 0; i < Microphone.devices.Length % mics.Length; i++) {
-            Debug.Log("Microphone " + i + ": " + Microphone.devices[i]);
-            mics[i].text = Microphone.devices[i];
+    private void createTracker() {
+        if(tracker != null) {
+            Destroy(tracker.gameObject);
+            tracker = null;
         }
+        GameObject trackerObj = new GameObject("tracker");
+        trackerObj.transform.parent = gameObject.transform;
+        tracker = trackerObj.AddComponent<AudioLevelTracker>();
+    }
+
+    private void Awake() {
+        devices = new();
+        foreach(DeviceDescriptor device in AudioSystem.InputDevices) {
+            devices.Add(device.ID);
+        }
+        sensClip = Microphone.Start(Microphone.devices[defaultMic], false, 1, 44100);
+        for (int i = 0; i < Microphone.devices.Length; i++) {
+            Debug.Log("Microphone " + i + ": " + Microphone.devices[i]);
+            if (i <= mics.Length) {
+                mics[i].text = Microphone.devices[i];
+            }
+        }
+        setMic();
 
         // inputClip = Microphone.Start(Microphone.devices[DEFAULTMIC], true, RECORDING_LENGTH_SECONDS, 44100);
         // isInit = true;
