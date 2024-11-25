@@ -5699,6 +5699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 1414394261}
   _player: {fileID: 516472805}
+  started: 0
 --- !u!61 &279482164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7948,6 +7949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 1414394261}
   _player: {fileID: 516472805}
+  started: 0
 --- !u!61 &333636301
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22585,6 +22587,7 @@ GameObject:
   - component: {fileID: 516472807}
   - component: {fileID: 516472806}
   - component: {fileID: 516472805}
+  - component: {fileID: 516472808}
   m_Layer: 0
   m_Name: Main Audio Source
   m_TagString: Untagged
@@ -22604,6 +22607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74068494a3c3984f9745f96d63b8596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blankZone: {fileID: 2088002096}
 --- !u!82 &516472806
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22716,6 +22720,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516472808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516472804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44d97e320be7f442bbf9b8f593ea71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tech: 0
+  nature: 0
+  hell: 0
 --- !u!1 &517378294
 GameObject:
   m_ObjectHideFlags: 0
@@ -98257,6 +98276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 1414394261}
   _player: {fileID: 516472805}
+  started: 0
 --- !u!61 &1262763557
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146091,6 +146111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 1414394261}
   _player: {fileID: 516472805}
+  started: 0
 --- !u!61 &2088002090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146552,7 +146573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecdfa597182ba74597f4366bac36fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 1414394261}
   _player: {fileID: 2088002091}
   victory: {fileID: 1270510093}
 --- !u!1 &2091946847

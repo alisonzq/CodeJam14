@@ -49,24 +49,24 @@ public class MultiSourcePlayer : MonoBehaviour
 
     public void play() {
         if (Progression.tech) {
-            tech.Play();
+            startTech();
         }
         if (Progression.hell) {
-            hell.Play();
+            startHell();
         }
         if (Progression.nature) {
-            nature.Play();
+            startNature();
         }
         if (Progression.tech && Progression.hell && Progression.nature) {
-            end.Play();
+            startEnd();
         }
     }
 
     public void stop() {
-        tech.Stop();
+        tech.Pause();
         hell.Stop();
         nature.Stop();
-        end .Stop();
+        end.Stop();
     }
 
 

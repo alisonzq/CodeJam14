@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZoneDelimiting : MonoBehaviour
@@ -10,6 +11,7 @@ public class ZoneDelimiting : MonoBehaviour
     [SerializeField]
     private ZonePlayer _player;
     private Collider2D _collider;
+    [SerializeField]
     private bool started = false;
 
     private bool legit = true;
@@ -25,7 +27,6 @@ public class ZoneDelimiting : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider) {
         if(legit && !started && collider == _character) {
-            Debug.Log("baa");
             StartCoroutine(Timer(collider));
             started = true;
             i++;
@@ -34,7 +35,6 @@ public class ZoneDelimiting : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision) {
         if(legit && started && collision == _character) {
-            Debug.Log("bee");
             StartCoroutine(Timer(collision));
             started = false;
             i++;
@@ -53,6 +53,9 @@ public class ZoneDelimiting : MonoBehaviour
             i = 0;
             if (legit && started && collider == _character) {
                 zoneName = ZoneContainer.getColliderName(_collider);
+                if(zoneName == null) {
+                    yield break;
+                }
                 _player.playZoneTrack(ZoneContainer.getColliderName(_collider));
             }
         }

@@ -14,6 +14,7 @@ public class ZoneLoader : MonoBehaviour
     {
         foreach (Collider2D zone in zones) {
             ZoneContainer.addZone(zone);
+            ZoneContainer.offsets.Add(0);
         }
         foreach (string name in names) {
             ZoneContainer.addName(name);

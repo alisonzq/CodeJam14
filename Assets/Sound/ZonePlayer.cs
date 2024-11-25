@@ -5,15 +5,28 @@ using UnityEngine;
 public class ZonePlayer : MonoBehaviour
 {
     AudioSource _source;
+    [SerializeField]
+    BlankZone _blankZone;
 
     private void Awake() {  
         _source = GetComponent<AudioSource>();
     }
 
     public void playZoneTrack(string zoneName) {
-        _source.Stop();
+        if (zoneName == "Blank") {
+            _blankZone.play();
+        }
+        else {
+            _blankZone.stop();
+        }
+        string currentClip = ZoneContainer.getClipName(_source.clip);
+        if (currentClip != null) {
+            ZoneContainer.SetOffset(currentClip, _source.timeSamples);
+        }
+        _source.Pause();
         _source.clip = ZoneContainer.GetClip(zoneName);
-       _source.Play();
+        _source.timeSamples = ZoneContainer.GetOffset(zoneName);
+        _source.Play();
     }
 
 }

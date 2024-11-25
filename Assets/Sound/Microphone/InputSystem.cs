@@ -52,6 +52,7 @@ public class InputSystem : MonoBehaviour
         createTracker();
         defaultMic = i;
         tracker.deviceID = devices[i];
+        Debug.Log("did set mic");
     }
     public void setSensitivity() {
         if (!isAdjusting) {
@@ -131,6 +132,8 @@ public class InputSystem : MonoBehaviour
         while (noPeak) {
             float vol = 20.0f * Mathf.Log10(samplesArray[i]);
             if (vol >= sensitivity) {
+                // sets offset to be the loudest peak
+                /*
                 if (lastVol < vol) {
                     offset = i;
                     Debug.Log("off " + offset);
@@ -138,6 +141,10 @@ public class InputSystem : MonoBehaviour
                     Debug.Log("sens " + sensitivity + "\n volume at offset " + vol);
                     chosen = true;
                 }
+                */
+                offset = i;
+                chosen = true;
+                break;
             }
             i++;
 
@@ -170,7 +177,7 @@ public class InputSystem : MonoBehaviour
         sensClip = Microphone.Start(Microphone.devices[defaultMic], false, 1, 44100);
         for (int i = 0; i < Microphone.devices.Length; i++) {
             Debug.Log("Microphone " + i + ": " + Microphone.devices[i]);
-            if (i <= mics.Length) {
+            if (i < mics.Length) {
                 mics[i].text = Microphone.devices[i];
             }
         }
@@ -182,21 +189,21 @@ public class InputSystem : MonoBehaviour
 
     IEnumerator RecordingNotifLaunch() {
         Debug.Log("recording now");
-        inputClipLaunch = Microphone.Start(Microphone.devices[defaultMic], true, RECORDING_LENGTH_SECONDS, 44100);
+        inputClipLaunch = Microphone.Start(Microphone.devices[defaultMic], false, RECORDING_LENGTH_SECONDS, 44100);
         yield return new WaitForSeconds(1);
         addToRecordings("Launch", inputClipLaunch);
     }
 
     IEnumerator RecordingNotifLyre() {
         Debug.Log("recording now");
-        inputClipLyre = Microphone.Start(Microphone.devices[defaultMic], true, RECORDING_LENGTH_SECONDS, 44100);
+        inputClipLyre = Microphone.Start(Microphone.devices[defaultMic], false, RECORDING_LENGTH_SECONDS, 44100);
         yield return new WaitForSeconds(1);
         addToRecordings("Lyre", inputClipLyre);
     }
 
     IEnumerator RecordingNotifBonetar() {
         Debug.Log("recording now");
-        inputClipBonetar = Microphone.Start(Microphone.devices[defaultMic], true, RECORDING_LENGTH_SECONDS, 44100);
+        inputClipBonetar = Microphone.Start(Microphone.devices[defaultMic], false, RECORDING_LENGTH_SECONDS, 44100);
         yield return new WaitForSeconds(1);
         addToRecordings("Bonetar", inputClipBonetar);
     }
