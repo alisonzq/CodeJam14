@@ -14,6 +14,7 @@ public class ZonePlayer : MonoBehaviour
 
     public void playZoneTrack(string zoneName) {
         if (zoneName == "Blank") {
+            _blankZone.stop();
             _blankZone.play();
         }
         else {
