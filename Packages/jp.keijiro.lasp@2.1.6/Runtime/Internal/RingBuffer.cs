@@ -66,7 +66,10 @@ namespace Lasp
 
         public void WriteEmpty(int length)
         {
-            UnityEngine.Debug.Assert(length <= FreeCount);
+            if(length <= FreeCount) {
+                UnityEngine.Debug.Log("assertionFailed");
+                return;
+            }
 
             var rp = ReadOffset;
             var wp = WriteOffset;
