@@ -524,14 +524,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: testRecordingLyre
-        m_Mode: 1
+        m_MethodName: TestRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Bowlyre
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &43062852
@@ -4924,14 +4924,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: testRecordingLauch
-        m_Mode: 1
+        m_MethodName: TestRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Launch
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &157906760
@@ -8082,14 +8082,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: restartRecordingLyre
-        m_Mode: 1
+        m_MethodName: RestartRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Bowlyre
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &354782299
@@ -8526,14 +8526,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: restartRecordingLaunch
-        m_Mode: 1
+        m_MethodName: RestartRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Launch
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &410103052
@@ -8791,14 +8791,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: restartRecordingBonetar
-        m_Mode: 1
+        m_MethodName: RestartRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Bonetar
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &433338823
@@ -9164,7 +9164,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: setMic
+        m_MethodName: SetMic
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22587,7 +22587,6 @@ GameObject:
   - component: {fileID: 516472807}
   - component: {fileID: 516472806}
   - component: {fileID: 516472805}
-  - component: {fileID: 516472808}
   m_Layer: 0
   m_Name: Main Audio Source
   m_TagString: Untagged
@@ -22720,21 +22719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &516472808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516472804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f44d97e320be7f442bbf9b8f593ea71c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tech: 0
-  nature: 0
-  hell: 0
 --- !u!1 &517378294
 GameObject:
   m_ObjectHideFlags: 0
@@ -69568,7 +69552,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: setMic
+        m_MethodName: SetMic
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -83111,7 +83095,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: setMic
+        m_MethodName: SetMic
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -100911,7 +100895,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: setSensitivity
+        m_MethodName: SetSensitivity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -105561,14 +105545,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: testRecordingBonetar
-        m_Mode: 1
+        m_MethodName: TestRecording
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Bonetar
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1523031334
@@ -124901,7 +124885,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1802952568}
         m_TargetAssemblyTypeName: InputSystem, Assembly-CSharp
-        m_MethodName: setMic
+        m_MethodName: SetMic
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -125652,26 +125636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600a2999b74e1664495bcfb315f70966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMic: 0
-  inputClipLaunch: {fileID: 0}
-  inputClipLyre: {fileID: 0}
-  inputClipBonetar: {fileID: 0}
-  sensitivity: -1
-  isAdjusting: 0
-  currentPeak: -1
-  sensClip: {fileID: 0}
-  test: {fileID: 1802952567}
-  maxMicPostion: 44100
-  greenBar: {fileID: 453817461}
+  _internalAudioSource: {fileID: 1802952567}
+  _sensitivityBar: {fileID: 453817461}
+  _loudestPeakBar: {fileID: 868002602}
   setBarTotal: {fileID: 2110254625}
-  yellowBar: {fileID: 868002602}
-  orangeBarObjLaunch: {fileID: 1864798694}
-  orangeBarObjLyre: {fileID: 686413972}
-  orangeBarObjBonetar: {fileID: 1191261850}
-  orangeBarLaunch: {fileID: 965523801}
-  orangeBarLyre: {fileID: 191466555}
-  orangeBarBonetar: {fileID: 92219837}
-  micPointer: {fileID: 0}
+  micPointer: {fileID: 1402226756}
+  orangeBarDictionary:
+    keys: []
+    values: []
   modifierScaleOrange: 0.0001
   modifierScale: 0.01
   modifierPos: 1070
@@ -125681,6 +125653,10 @@ MonoBehaviour:
   - {fileID: 2027998464}
   - {fileID: 831239717}
   - {fileID: 278589570}
+  maxMicPosition: 44100
+  sensitivity: -1
+  currentPeak: -1
+  isAdjusting: 0
 --- !u!4 &1802952569
 Transform:
   m_ObjectHideFlags: 0
