@@ -45,12 +45,6 @@ public class InputSystem : MonoBehaviour
     #region Serialized
 
     [SerializeField]
-    public SerializedDictionary<string, ObjectTuple> dict;
-    [SerializeField]
-    public SerializedDictionary<int, GameObject> dict2;
-    [SerializeField]
-    public SerializedDictionary<Color32, Sprite> dict3;
-    [SerializeField]
     private AudioSource _internalAudioSource;
     [SerializeField]
     private GameObject _sensitivityBar;
@@ -61,9 +55,9 @@ public class InputSystem : MonoBehaviour
     [SerializeField]
     private GameObject micPointer;
     [SerializeField]
-    private float modifierScaleOrange;
+    private SerializedDictionary<string, GameObject> orangeBarDictionary;
     [SerializeField]
-    private float maxScaleOrange;
+    private float modifierScaleOrange;
     [SerializeField]
     private float modifierScale;
     [SerializeField]
@@ -159,21 +153,7 @@ public class InputSystem : MonoBehaviour
     // *TODO* Write the logic to track recording progress
     // for each instrument
     private void HandleRecordingBars(string recording) {
-        foreach (KeyValuePair<string, ObjectTuple> pair in dict) {
-            pair.Value.bar.SetActive(false);
-        }
-        StartCoroutine(RecordingBarsCoroutine(recording));
-    }
 
-    private IEnumerator RecordingBarsCoroutine(string recording) {
-        float size = Microphone.GetPosition(Microphone.devices[currentMic]);
-        GameObject orangeBar = dict[recording].orangeBar;  //.orangeBar
-        dict[recording].bar.SetActive(true);  //.bar
-        while (size * modifierScaleOrange < maxScaleOrange) {
-            size = Microphone.GetPosition(Microphone.devices[currentMic]);
-            orangeBar.transform.localScale = new Vector2(size * modifierScaleOrange, orangeBar.transform.localScale.y);
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     // *TODO* Implement a pointer that will point to the playback

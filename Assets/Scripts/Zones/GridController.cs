@@ -9,16 +9,16 @@ public class GridController : MonoBehaviour {
 
     public void Update() {
         if (Progression.tech) {
-            normal.SetActive(false);
             tech.SetActive(true);
+            normal.SetActive(false);
         }
         if (Progression.nature) {
-            tech.SetActive(false);
             nature.SetActive(true);
+            tech.SetActive(false);
         }
         if (Progression.hell) {
-            nature.SetActive(false);
             hell.SetActive(true);
+            nature.SetActive(false);
         }
 
     }
