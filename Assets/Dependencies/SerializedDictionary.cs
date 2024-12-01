@@ -7,7 +7,7 @@ using UnityEngine;
 public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
     [SerializeField] private List<TKey> keys = new List<TKey>();
     [SerializeField] private List<TValue> values = new List<TValue>();
-
+    [SerializeField] private string newKey;
     public void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
