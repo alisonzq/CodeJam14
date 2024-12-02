@@ -45,6 +45,8 @@ public class InputSystem : MonoBehaviour
     #region Serialized
 
     [SerializeField]
+    public SerializedDictionary<string, ObjectTuple> dict;
+    [SerializeField]
     private AudioSource _internalAudioSource;
     [SerializeField]
     private GameObject _sensitivityBar;
